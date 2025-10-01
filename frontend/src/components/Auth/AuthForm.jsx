@@ -9,7 +9,8 @@ const AuthForm = ({ isLogin, onSubmit, loading = false, onSwitchView }) => {
     fullName: '',
     email: '',
     password: '',
-    confirmPassword: ''
+    confirmPassword: '',
+    role: 'User'
   });
 
   const [errors, setErrors] = useState({});
@@ -76,6 +77,20 @@ const AuthForm = ({ isLogin, onSubmit, loading = false, onSwitchView }) => {
       </div>
 
       <form onSubmit={handleSubmit} className={styles.authForm}>
+        <div className={styles.inputGroup}>
+          <label htmlFor="role" className={styles.label}>Role</label>
+          <select
+            id="role"
+            name="role"
+            value={formData.role}
+            onChange={handleChange}
+            className={styles.input}
+            required
+          >
+            <option value="Admin">Admin</option>
+            <option value="User">User</option>
+          </select>
+        </div>
         {!isLogin && (
           <Input
             label="Full Name"
