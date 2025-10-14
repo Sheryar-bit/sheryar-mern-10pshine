@@ -3,15 +3,13 @@ import AuthForm from './AuthForm.jsx';
 import styles from '../Style/Auth.module.css';
 
 
-const AuthPage = ({ isLogin = false, onSwitchView }) => {
+const AuthPage = ({ isLogin = false, onSwitchView, onLoginSuccess }) => {
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (formData) => {
     setLoading(true);
     try {
-      console.log('Form submitted:', formData);
       await new Promise(resolve => setTimeout(resolve, 2000));
-      console.log(isLogin ? 'Login successful' : 'Signup successful');
     } catch (error) {
       console.error('Authentication error:', error);
     } finally {
@@ -43,6 +41,7 @@ const AuthPage = ({ isLogin = false, onSwitchView }) => {
             onSubmit={handleSubmit} 
             loading={loading}
             onSwitchView={onSwitchView}
+            onLoginSuccess={onLoginSuccess}
           />
         </div>
       </div>
