@@ -1,4 +1,9 @@
 {
+  "scripts": {
+    "start": "node app.js",
+    "test": "mocha \"test/**/*.test.js\" --timeout 5000 --exit",
+    "test:watch": "mocha \"test/**/*.test.js\" --timeout 5000 --watch"
+  },
   "dependencies": {
     "bcrypt": "^6.0.0",
     "body-parser": "^2.2.0",
@@ -9,5 +14,12 @@
     "pino": "^10.0.0",
     "pino-http": "^11.0.0",
     "pino-pretty": "^13.1.2"
+  },
+  "devDependencies": {
+    "chai": "^6.2.0",
+    "chai-http": "^5.1.2",
+    "mocha": "^11.7.4",
+    "sinon": "^21.0.0",
+    "supertest": "^7.1.4"
   }
 }
