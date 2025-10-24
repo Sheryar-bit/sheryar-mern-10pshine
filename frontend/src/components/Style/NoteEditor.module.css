@@ -1,0 +1,489 @@
+/* NoteEditor Modern Design */
+
+.editorPage {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4e9f2 100%);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+[data-theme="dark"] .editorPage {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+}
+
+.header {
+  background: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  padding: 20px 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(10px);
+}
+
+[data-theme="dark"] .header {
+  background: rgba(35, 41, 70, 0.95);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.headerContent {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.backBtn {
+  padding: 10px 20px;
+  background: transparent;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  color: #718096;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.backBtn:hover {
+  background: #f7fafc;
+  border-color: #667eea;
+  color: #667eea;
+  transform: translateX(-2px);
+}
+
+[data-theme="dark"] .backBtn {
+  border-color: #444;
+  color: #a0aec0;
+}
+
+[data-theme="dark"] .backBtn:hover {
+  background: rgba(102, 126, 234, 0.1);
+  border-color: #667eea;
+  color: #667eea;
+}
+
+.headerActions {
+  display: flex;
+  gap: 12px;
+}
+
+.saveBtn {
+  padding: 12px 28px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.saveBtn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+}
+
+.saveBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px;
+}
+
+.editorCard {
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  animation: slideUp 0.4s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+[data-theme="dark"] .editorCard {
+  background: rgba(35, 41, 70, 0.6);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.editorHeader {
+  padding: 32px 32px 0 32px;
+}
+
+.pageTitle {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #2d3748;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+[data-theme="dark"] .pageTitle {
+  color: #e2e8f0;
+}
+
+.pageSubtitle {
+  color: #718096;
+  font-size: 1rem;
+  margin-bottom: 24px;
+}
+
+[data-theme="dark"] .pageSubtitle {
+  color: #a0aec0;
+}
+
+.formGroup {
+  margin-bottom: 24px;
+}
+
+.label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 600;
+  color: #4a5568;
+  font-size: 0.95rem;
+}
+
+[data-theme="dark"] .label {
+  color: #e2e8f0;
+}
+
+.titleInput {
+  width: 100%;
+  padding: 16px 20px;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 1.5rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  background: #f7fafc;
+  color: #2d3748;
+}
+
+.titleInput:focus {
+  outline: none;
+  border-color: #667eea;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.titleInput::placeholder {
+  color: #cbd5e0;
+}
+
+[data-theme="dark"] .titleInput {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: #444;
+  color: #e2e8f0;
+}
+
+[data-theme="dark"] .titleInput:focus {
+  border-color: #667eea;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.editorBody {
+  padding: 32px;
+}
+
+.contentInput {
+  width: 100%;
+  padding: 20px;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  transition: all 0.3s ease;
+  background: #f7fafc;
+  color: #2d3748;
+  resize: vertical;
+  min-height: 400px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.contentInput:focus {
+  outline: none;
+  border-color: #667eea;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.contentInput::placeholder {
+  color: #cbd5e0;
+}
+
+[data-theme="dark"] .contentInput {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: #444;
+  color: #e2e8f0;
+}
+
+[data-theme="dark"] .contentInput:focus {
+  border-color: #667eea;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.editorFooter {
+  padding: 24px 32px;
+  background: #f7fafc;
+  border-top: 2px solid #e2e8f0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+[data-theme="dark"] .editorFooter {
+  background: rgba(255, 255, 255, 0.02);
+  border-color: #444;
+}
+
+.footerInfo {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.infoItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #718096;
+  font-size: 0.9rem;
+}
+
+[data-theme="dark"] .infoItem {
+  color: #a0aec0;
+}
+
+.roleSelect {
+  padding: 8px 16px;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  background: white;
+  color: #2d3748;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.roleSelect:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+[data-theme="dark"] .roleSelect {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: #444;
+  color: #e2e8f0;
+}
+
+.footerActions {
+  display: flex;
+  gap: 12px;
+}
+
+.cancelBtn {
+  padding: 12px 24px;
+  background: transparent;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  color: #718096;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cancelBtn:hover {
+  background: #f7fafc;
+  border-color: #fc8181;
+  color: #fc8181;
+}
+
+[data-theme="dark"] .cancelBtn {
+  border-color: #444;
+  color: #a0aec0;
+}
+
+[data-theme="dark"] .cancelBtn:hover {
+  background: rgba(252, 129, 129, 0.1);
+  border-color: #fc8181;
+  color: #fc8181;
+}
+
+.toolbar {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+  padding: 12px;
+  background: #f7fafc;
+  border-radius: 12px;
+  flex-wrap: wrap;
+}
+
+[data-theme="dark"] .toolbar {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.toolbarBtn {
+  padding: 8px 12px;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  color: #4a5568;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.toolbarBtn:hover {
+  background: #667eea;
+  color: white;
+  border-color: #667eea;
+}
+
+[data-theme="dark"] .toolbarBtn {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: #444;
+  color: #e2e8f0;
+}
+
+.characterCount {
+  color: #a0aec0;
+  font-size: 0.85rem;
+  margin-top: 8px;
+}
+
+.savingIndicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #48bb78;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.savingSpinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid #e2e8f0;
+  border-top-color: #667eea;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .headerContent {
+    padding: 0 20px;
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .headerActions {
+    width: 100%;
+  }
+
+  .saveBtn {
+    flex: 1;
+  }
+
+  .container {
+    padding: 20px;
+  }
+
+  .editorHeader,
+  .editorBody,
+  .editorFooter {
+    padding: 20px;
+  }
+
+  .pageTitle {
+    font-size: 1.5rem;
+  }
+
+  .titleInput {
+    font-size: 1.2rem;
+  }
+
+  .contentInput {
+    min-height: 300px;
+    font-size: 1rem;
+  }
+
+  .editorFooter {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .footerActions {
+    width: 100%;
+  }
+
+  .cancelBtn,
+  .saveBtn {
+    flex: 1;
+  }
+
+  .toolbar {
+    padding: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pageTitle {
+    font-size: 1.3rem;
+  }
+
+  .titleInput {
+    font-size: 1.1rem;
+    padding: 12px 16px;
+  }
+
+  .contentInput {
+    padding: 16px;
+  }
+
+  .toolbarBtn {
+    padding: 6px 10px;
+    font-size: 0.85rem;
+  }
+}

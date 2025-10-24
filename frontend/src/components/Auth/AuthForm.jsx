@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { User, Mail, Lock, BookOpen } from 'lucide-react';
+import axios from 'axios';
 import Input from '../UI/Input.jsx';  
 import Button from '../UI/Button.jsx';
 import styles from '../Style/Auth.module.css';
 
-const AuthForm = ({ isLogin, onSubmit, loading = false, onSwitchView }) => {
+const AuthForm = ({ isLogin, onSubmit, loading = false, onSwitchView, onLoginSuccess }) => {
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -56,10 +57,21 @@ const AuthForm = ({ isLogin, onSubmit, loading = false, onSwitchView }) => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateForm()) {
-      onSubmit(formData);
+      try {
+        const endpoint = isLogin ? '/api/auth/login' : '/api/auth/register';
+        const data = isLogin ? { email: formData.email, password: formData.password } : formData;
+        const response = await axios.post(`http://localhost:5000${endpoint}`, data);
+        if (response.data.token) {
+          onLoginSuccess(response.data.token);
+        } else {
+          alert(isLogin ? 'Login failed' : 'Registration failed');
+        }
+      } catch (err) {
+        alert(err.response?.data?.error || 'An error occurred');
+      }
     }
   };
 
