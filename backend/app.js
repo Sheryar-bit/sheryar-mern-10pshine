@@ -1,9 +1,11 @@
 const express = require('express');
+const http = require('http');
 const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const pinoHttp = require('pino-http');
 const logger = require('./config/logger');
+const { initializeSocket } = require('./socket');
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -34,6 +36,11 @@ app.get('/', (req, res) => {
 });
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  logger.info(`Server running on port ${PORT}`);
+const server = http.createServer(app);
+
+// Initialize Socket.IO
+initializeSocket(server);
+
+server.listen(PORT, () => {
+  logger.info(`Server running on port ${PORT} with Socket.IO enabled`);
 });

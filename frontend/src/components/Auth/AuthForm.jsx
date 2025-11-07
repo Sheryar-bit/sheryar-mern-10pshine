@@ -99,7 +99,6 @@ const AuthForm = ({ isLogin, onSubmit, loading = false, onSwitchView, onLoginSuc
             className={styles.input}
             required
           >
-            <option value="Admin">Admin</option>
             <option value="User">User</option>
           </select>
         </div>

@@ -29,6 +29,20 @@ async function getNotes(userId) {
   });
 }
 
+async function getNoteById(noteId) {
+  const sql = 'SELECT * FROM notes WHERE id = ?';
+  return new Promise((resolve, reject) => {
+    db.query(sql, [noteId], (err, results) => {
+      if (err) {
+        logger.error({ err, noteId }, 'Database error: Failed to retrieve note by ID');
+        return reject(err);
+      }
+      logger.debug({ noteId, found: results.length > 0 }, 'Note retrieved from database by ID');
+      resolve(results[0] || null);
+    });
+  });
+}
+
 async function updateNote(noteId, title, content) {
   const sql = 'UPDATE notes SET title = ?, content = ? WHERE id = ?';
   return new Promise((resolve, reject) => {
@@ -60,6 +74,7 @@ async function deleteNote(noteId) {
 module.exports = {
   createNote,
   getNotes,
+  getNoteById,
   updateNote,
   deleteNote
 };

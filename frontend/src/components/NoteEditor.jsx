@@ -154,7 +154,6 @@ const NoteEditor = ({ token, note, onSave, onCancel }) => {
                   className={styles.roleSelect}
                 >
                   <option value="User">User</option>
-                  <option value="Admin">Admin</option>
                 </select>
               </div>
             </div>
